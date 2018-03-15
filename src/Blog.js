@@ -48,15 +48,17 @@ class Post extends React.Component {
 }
 
 function checkTags (arr, searchString) {
-  console.log(searchString);
+  console.log("search string: " + searchString);
   let new_arr = []//this.state.active_tags.slice();
-  let tags = qs.parse(searchString);
-  console.log(tags);
-  if (typeof tags["tits"] !== "undefined") {
-    Array.prototype.forEach.call(tags["tits"], t => {
+  let tags = searchString.substr(1)
+  console.log("parsed tag: ");
+  console.log(tags)
+  if (typeof tags["test"] !== "undefined") {
+    Array.prototype.forEach.call(tags["test"], t => {
       new_arr.push(t);
     });
-    console.log(new_arr);
+    console.log("new arr");
+    console.log(new_arr)
   }
 };
 
@@ -101,7 +103,6 @@ class Blog extends React.Component {
   // };
 
   render() {
-    console.log(this.props);
     const posts = this.state.posts.map(post => {
       if (this.props.location.search === "") {
         return (
@@ -132,9 +133,8 @@ class Blog extends React.Component {
       }
     });
     
-    console.log(this.props);
     const filters = this.state.buttons.tags.map((tag, index) => {
-      let total_path = window.URLSearchParams + "?" + tag;
+      let total_path = "?" + tag;
 
       return (
         <NavLink
